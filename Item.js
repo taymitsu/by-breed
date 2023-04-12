@@ -7,10 +7,15 @@ function Item(props) {
   const { breed } = data
   const keys = Object.keys(data).filter(key => key != 'breed')
 
+  const average = (keys.reduce((acc, key) => {
+    return acc += data[key]
+  }, 0) / keys.length).toFixed(1)
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{index}: {breed}</Text>
+      <Text style={styles.label}>{index}: {breed} {average}</Text>
       { /* {keys.map(key => <Text>{key} {data[key]}</Text>)} */ }
+      { /*  https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key */ }
       {keys.map(key => <Feature name={key} value={data[key]}/>)}
     </View>
   );
